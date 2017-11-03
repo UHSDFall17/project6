@@ -49,10 +49,10 @@ public class EventDatabaseTest {
 		System.out.println(address);
 		System.out.println(time);
 	}
-	public int SearchEvent(String days, String months, String cities, String states) {
-		if((day.equals(days) && months.equals(null))) {
-			
+	public String SearchEvent(String days, String months, String cities, String states) {
+		if(days.equals("Day") && months.equals("Month") && cities.equals("City") && states.equals("State")) {
+			return("no information given");
 		}
-		return 0;
+		return "0";
 	}
 }

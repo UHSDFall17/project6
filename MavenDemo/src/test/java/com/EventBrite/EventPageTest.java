@@ -56,8 +56,13 @@ public class EventPageTest extends JFrame {
 	 * Create the frame.
 	 */
 	public EventPageTest(final ArrayList<EventDatabaseTest> theEvents) {
+<<<<<<< HEAD
 		//System.out.println(theEvents.get(0).title);
 		//System.out.println(theEvents.get(0).city);
+=======
+		System.out.println(theEvents.get(0).title);
+		System.out.println(theEvents.get(0).city);
+>>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1011, 617);
@@ -67,9 +72,24 @@ public class EventPageTest extends JFrame {
 		contentPane.setLayout(null);
 		JLabel lblEventbrite = new JLabel("EventBrite");
 		lblEventbrite.setFont(new Font("Tahoma", Font.PLAIN, 30));
+<<<<<<< HEAD
 		lblEventbrite.setBounds(726, 24, 255, 32);
 		contentPane.add(lblEventbrite);
 
+=======
+		lblEventbrite.setBounds(306, 13, 255, 32);
+		contentPane.add(lblEventbrite);
+
+		JButton btnMenu = new JButton("Menu");
+		btnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		btnMenu.setBounds(251, 75, 97, 25);
+		contentPane.add(btnMenu);
+
+>>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 				txtMonth = new JTextField();
 				txtMonth.setText("Month");
 				txtMonth.setBounds(360, 100, 116, 22);
@@ -107,7 +127,11 @@ public class EventPageTest extends JFrame {
 
 		JLabel lblEvents = new JLabel("Events");
 		lblEvents.setFont(new Font("Tahoma", Font.PLAIN, 20));
+<<<<<<< HEAD
 		lblEvents.setBounds(272, 68, 76, 32);
+=======
+		lblEvents.setBounds(338, 128, 76, 32);
+>>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 		contentPane.add(lblEvents);
 
 	}

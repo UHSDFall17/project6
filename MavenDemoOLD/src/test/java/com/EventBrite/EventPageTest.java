@@ -30,6 +30,8 @@ public class EventPageTest extends JFrame {
 	private JTextField txtCity;
 	private JTextField txtState;
 	private JButton btnLookForEvent;
+	
+	static int x = 0; //Number of events in the system
 
 	static ArrayList<EventDatabaseTest> theEvents = new ArrayList<EventDatabaseTest>();
 
@@ -66,62 +68,49 @@ public class EventPageTest extends JFrame {
 		lblEventbrite.setBounds(662, 9, 255, 32);
 		contentPane.add(lblEventbrite);
 
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBackground(Color.WHITE);
-		// lblNewLabel.setIcon(new
-		// ImageIcon("C:\\Users\\Etienne\\Desktop\\Personal\\Classes\\Software
-		// Design\\Last Stand of the Crimson Fists x 1000.jpg"));
-		lblNewLabel.setIcon(new ImageIcon(
-				"C:\\Users\\Etienne\\eclipse-workspace\\MavenDemo\\src\\test\\resources\\eventBrite screenshot.png"));
-		lblNewLabel.setBounds(12, 169, 1458, 771);
-		contentPane.add(lblNewLabel);
-
 		JButton btnMenu = new JButton("Menu");
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnLookForEvent = new JButton("Look For Event");
-				btnLookForEvent.setBounds(1077, 94, 130, 25);
-				contentPane.add(btnLookForEvent);
+
 			}
 		});
 		btnMenu.setBounds(607, 71, 97, 25);
 		contentPane.add(btnMenu);
 
-		JButton btnSearch = new JButton("Search");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				txtMonth = new JTextField();
 				txtMonth.setText("Month");
-				txtMonth.setBounds(835, 108, 116, 22);
+				txtMonth.setBounds(716, 96, 116, 22);
 				contentPane.add(txtMonth);
 				txtMonth.setColumns(10);
 
 				txtCity = new JTextField();
 				txtCity.setText("City");
-				txtCity.setBounds(956, 84, 116, 22);
+				txtCity.setBounds(837, 72, 116, 22);
 				contentPane.add(txtCity);
 				txtCity.setColumns(10);
 
 				txtDay = new JTextField();
 				txtDay.setText("Day");
-				txtDay.setBounds(835, 84, 116, 22);
+				txtDay.setBounds(716, 72, 116, 22);
 				contentPane.add(txtDay);
 				txtDay.setColumns(10);
 
 				txtState = new JTextField();
 				txtState.setText("State");
-				txtState.setBounds(956, 108, 116, 22);
+				txtState.setBounds(837, 96, 116, 22);
 				contentPane.add(txtState);
 				txtState.setColumns(10);
-
-				btnLookForEvent = new JButton("Look For Event");
-				btnLookForEvent.setBounds(1077, 94, 130, 25);
-				contentPane.add(btnLookForEvent);
-
-			}
-		});
-		btnSearch.setBounds(733, 71, 97, 25);
-		contentPane.add(btnSearch);
+				
+				JButton btnLookForEvent_1 = new JButton("Look for Event");
+				btnLookForEvent_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						for(int i=0; i<x; i++) {
+							theEvents.get(i).SearchEvent(txtDay.getText(), txtMonth.getText(), txtCity.getText(), txtState.getText());
+						}
+					}
+				});
+				btnLookForEvent_1.setBounds(959, 71, 117, 25);
+				contentPane.add(btnLookForEvent_1);
 
 		JLabel lblEvents = new JLabel("Events");
 		lblEvents.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -131,7 +120,6 @@ public class EventPageTest extends JFrame {
 	}
 
 	public static void InitTestData() {
-		int x = 0;
 		int asset = 0;
 		try {
 			File file = new File("Fake Events.txt");

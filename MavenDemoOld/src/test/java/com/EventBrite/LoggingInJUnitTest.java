@@ -14,5 +14,4 @@ public class LoggingInJUnitTest {
 		boolean logIn = loginPage.theUsers.get(0).loggingIn("KarlFranz", "PrinceandEmperor");
 		assertEquals(true, logIn);
 	}
-
 }
