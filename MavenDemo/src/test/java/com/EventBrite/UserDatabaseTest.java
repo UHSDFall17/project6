@@ -26,6 +26,12 @@ public class UserDatabaseTest {
 			return false;
 		}
 	}
+	public boolean newUser(String name, String email, String pass) {
+		if(name.equals("Username") || email.equals("Email") || pass.equals("Password")) {
+			return false;
+		}
+		return true;
+	}
 
 	public String getUsername() {
 		return username;
@@ -51,6 +57,7 @@ public class UserDatabaseTest {
 	}
 
 	public String printUsers() {
+		//System.out.println("Printing users");
 		return username + " : " + password;
 
 	}

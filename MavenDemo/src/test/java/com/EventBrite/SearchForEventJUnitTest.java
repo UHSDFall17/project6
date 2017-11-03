@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class SearchForEventTest {
+public class SearchForEventJUnitTest {
 
 	@Test
 	public void test() {

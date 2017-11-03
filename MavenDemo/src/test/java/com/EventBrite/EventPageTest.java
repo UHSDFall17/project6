@@ -42,8 +42,8 @@ public class EventPageTest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InitTestData();
-					EventPageTest frame = new EventPageTest();
+					//InitTestData();
+					EventPageTest frame = new EventPageTest(theEvents);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,49 +55,42 @@ public class EventPageTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EventPageTest() {
+	public EventPageTest(final ArrayList<EventDatabaseTest> theEvents) {
+		//System.out.println(theEvents.get(0).title);
+		//System.out.println(theEvents.get(0).city);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1500, 1000);
+		setBounds(100, 100, 1011, 617);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JLabel lblEventbrite = new JLabel("EventBrite");
 		lblEventbrite.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblEventbrite.setBounds(662, 9, 255, 32);
+		lblEventbrite.setBounds(726, 24, 255, 32);
 		contentPane.add(lblEventbrite);
-
-		JButton btnMenu = new JButton("Menu");
-		btnMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		btnMenu.setBounds(607, 71, 97, 25);
-		contentPane.add(btnMenu);
 
 				txtMonth = new JTextField();
 				txtMonth.setText("Month");
-				txtMonth.setBounds(716, 96, 116, 22);
+				txtMonth.setBounds(360, 100, 116, 22);
 				contentPane.add(txtMonth);
 				txtMonth.setColumns(10);
 
 				txtCity = new JTextField();
 				txtCity.setText("City");
-				txtCity.setBounds(837, 72, 116, 22);
+				txtCity.setBounds(481, 76, 116, 22);
 				contentPane.add(txtCity);
 				txtCity.setColumns(10);
 
 				txtDay = new JTextField();
 				txtDay.setText("Day");
-				txtDay.setBounds(716, 72, 116, 22);
+				txtDay.setBounds(360, 76, 116, 22);
 				contentPane.add(txtDay);
 				txtDay.setColumns(10);
 
 				txtState = new JTextField();
 				txtState.setText("State");
-				txtState.setBounds(837, 96, 116, 22);
+				txtState.setBounds(481, 100, 116, 22);
 				contentPane.add(txtState);
 				txtState.setColumns(10);
 				
@@ -109,12 +102,12 @@ public class EventPageTest extends JFrame {
 						}
 					}
 				});
-				btnLookForEvent_1.setBounds(959, 71, 117, 25);
+				btnLookForEvent_1.setBounds(603, 75, 117, 25);
 				contentPane.add(btnLookForEvent_1);
 
 		JLabel lblEvents = new JLabel("Events");
 		lblEvents.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEvents.setBounds(694, 124, 76, 32);
+		lblEvents.setBounds(272, 68, 76, 32);
 		contentPane.add(lblEvents);
 
 	}
