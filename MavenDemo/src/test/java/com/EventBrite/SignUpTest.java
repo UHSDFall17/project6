@@ -141,7 +141,7 @@ public class SignUpTest extends JFrame {
 		contentPane.add(btnSubmit);
 
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(80, 155, 149, 16);
+		lblNewLabel.setBounds(80, 155, 187, 16);
 		contentPane.add(lblNewLabel);
 		if(exists) {
 			System.out.println("Here's a user");
@@ -158,6 +158,8 @@ public class SignUpTest extends JFrame {
 				//System.out.println("Found one");
 				lblNewLabel.setText("Username already Exists");
 				return true;
+			}else if(txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtEmail.getText().equals("Email")) {
+				lblNewLabel.setText("Unique information required");
 			}
 			// System.out.println("username already exists");
 			else {
@@ -172,6 +174,14 @@ public class SignUpTest extends JFrame {
 						output.append("\n");
 						output.append(txtEmail.getText());
 						output.close();
+						
+						x++;
+						
+						knownUsers.add(new UserDatabaseTest());
+						knownUsers.get(x).setUsername(txtUsername.getText());
+						knownUsers.get(x).setPassword(txtPassword.getText());
+						knownUsers.get(x).setEmail(txtEmail.getText());
+						
 						} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
