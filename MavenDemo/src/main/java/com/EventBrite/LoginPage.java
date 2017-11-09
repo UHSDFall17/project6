@@ -26,7 +26,7 @@ public class LoginPage extends JFrame {
 	private JPanel contentPane;
 	private JTextField username;
 	private JTextField password;
-	EventPage eventPage = new EventPage();
+	static EventPage eventPage = new EventPage();
 	static LoginPage loginPage = new LoginPage();
 	static ArrayList<UserDatabase> theUsers = new ArrayList<UserDatabase>();
 
