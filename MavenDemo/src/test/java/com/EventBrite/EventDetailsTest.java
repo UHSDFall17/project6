@@ -1,6 +1,5 @@
 package com.EventBrite;
 
-import static com.EventBrite.LoginPageTest.loginPage;
 import com.EventBrite.Transaction.TransactionPageTest;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -84,9 +83,8 @@ public class EventDetailsTest extends JFrame {
         purchase.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //System.out.println(theUsers.size());
-                TransactionPageTest transaction = new TransactionPageTest(theEvent);
+                TransactionPageTest transaction = new TransactionPageTest(theEvent, EventDetailsTest.this);
                 transaction.setVisible(true);
-                loginPage.dispose();
             }
         });
         purchase.setBounds(250, 218, 179, 20);
