@@ -43,16 +43,17 @@ public class LoginPageTest extends JFrame {
 		theUsers = InitUserData();
 		theEvents = InitEventData();
 		
+		//Check that info was read in properly
+		/*for(int i=0; i<numOfUsers; i++) {
+			System.out.println(theUsers.get(i).username);
+		}
+		for(int i=0; i<numOfEvents; i++) {
+			System.out.println(theEvents.get(i).title);
+		}
+		*/
+		
 		eventPage = new EventPageTest(theEvents);
-		
 		loginPage = new LoginPageTest(theUsers);
-<<<<<<< HEAD
-=======
-		
-		//Check that info has been read in properly
-		//System.out.println(theUsers.get(0).username);
-		//System.out.println(theEvents.get(0).title);
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,6 +65,7 @@ public class LoginPageTest extends JFrame {
 			}
 		});
 	}
+	//Read in Event Data
 	public static ArrayList<EventDatabaseTest> InitEventData() {
 		ArrayList<EventDatabaseTest> theEvents= new ArrayList<EventDatabaseTest>();
 		int asset = 0;
@@ -84,15 +86,16 @@ public class LoginPageTest extends JFrame {
 					continue;
 				}
 				if (asset == 1) {
-					theEvents.get(numOfEvents).setMonth(line);
+					theEvents.get(numOfEvents).setDay(line);
 					asset = 2;
 					continue;
 				}
 				if (asset == 2) {
-					theEvents.get(numOfEvents).setDay(line);
+					theEvents.get(numOfEvents).setMonth(line);
 					asset = 3;
 					continue;
 				}
+				
 				if (asset == 3) {
 					theEvents.get(numOfEvents).setCity(line);
 					asset = 4;
@@ -103,7 +106,17 @@ public class LoginPageTest extends JFrame {
 					asset = 5;
 					continue;
 				}
-				if (asset == 5) {
+				if(asset == 5) {
+					theEvents.get(numOfEvents).setBuildingNum(line);
+					asset = 6;
+					continue;
+				}
+				if(asset == 6) {
+					theEvents.get(numOfEvents).setStreet(line);
+					asset = 7;
+					continue;
+				}
+				if (asset == 7) {
 					theEvents.get(numOfEvents).setTime(line);
 					asset = 0;
 					numOfEvents++;
@@ -116,13 +129,11 @@ public class LoginPageTest extends JFrame {
 		}
 		return theEvents;
 	}
+	
+	//Read in User Data
 	public static ArrayList<UserDatabaseTest> InitUserData() {
 		//System.out.println("Initialising");
-<<<<<<< HEAD
 		theUsers = new ArrayList<UserDatabaseTest>();
-=======
-		ArrayList<UserDatabaseTest> theUsers = new ArrayList<UserDatabaseTest>();
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 		try {
 			//System.out.println("Trying");
 			
@@ -161,14 +172,8 @@ public class LoginPageTest extends JFrame {
 		return theUsers;
 	}
 	
-	
-	
-	
-	
-	
-	
-	// Create the frame.
 
+	// Create the frame.
 	public LoginPageTest(final ArrayList<UserDatabaseTest> theUsers) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -209,7 +214,7 @@ public class LoginPageTest extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < theUsers.size(); i++) {
 					if (theUsers.get(i).loggingIn(username.getText(), password.getText())) {
-						System.out.println("Successfully logged in with " + theUsers.get(i).username);
+						//System.out.println("Successfully logged in with " + theUsers.get(i).username);
 						loginPage.dispose();
 						eventPage.setVisible(true);
 						break;
@@ -230,14 +235,10 @@ public class LoginPageTest extends JFrame {
 		JButton btnCreateAccount = new JButton("Create an Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				System.out.println(theUsers.size());
-				SignUpTest signUp = new SignUpTest(theUsers);
+				//System.out.println(theUsers.size());
+				SignUpTest signUp = new SignUpTest(theUsers, loginPage);
 				signUp.setVisible(true);
-				//loginPage.dispose();
-=======
-
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
+				loginPage.dispose();
 			}
 		});
 

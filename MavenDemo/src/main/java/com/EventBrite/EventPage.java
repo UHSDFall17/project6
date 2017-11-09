@@ -1,11 +1,15 @@
 package com.EventBrite;
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.awt.Panel;
 import java.awt.Color;
 
 public class EventPage extends JFrame {

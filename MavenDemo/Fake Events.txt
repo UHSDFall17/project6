@@ -6,6 +6,7 @@ CA
 37495
 Wellington Blv.
 10:00
+8.00
 Hound Town
 13
 9
@@ -14,6 +15,7 @@ TX
 96942
 Scott St.
 9:00
+10.50
 Halloween Spooktacular
 4
 6
@@ -22,3 +24,4 @@ NY
 18403
 Champs Elysses
 8:00
+FREE

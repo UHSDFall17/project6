@@ -1,4 +1,5 @@
 package com.EventBrite;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,12 +8,14 @@ import java.io.IOException;
 public class UserDatabaseTest {
 
 	public String username, password, email;
+	boolean loggedIn = false;
 
 	public UserDatabaseTest(String name, String pass, String mail) {
 		username = name;
 		password = pass;
 		email = mail;
 	}
+
 	public UserDatabaseTest() {
 		username = "";
 		password = "";
@@ -26,8 +29,9 @@ public class UserDatabaseTest {
 			return false;
 		}
 	}
+
 	public boolean newUser(String name, String email, String pass) {
-		if(name.equals("Username") || email.equals("Email") || pass.equals("Password")) {
+		if (name.equals("Username") || email.equals("Email") || pass.equals("Password")) {
 			return false;
 		}
 		return true;
@@ -48,6 +52,7 @@ public class UserDatabaseTest {
 	public void setPassword(String pass) {
 		password = pass;
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -56,8 +61,23 @@ public class UserDatabaseTest {
 		email = mail;
 	}
 
+	public void setLoggedIn(boolean x) {
+		if (x == true) {
+			loggedIn = true;
+
+		} else if (x == false) {
+			loggedIn = false;
+		}
+	}
+
+	public boolean loggedIn() {
+
+		return loggedIn;
+
+	}
+
 	public String printUsers() {
-		//System.out.println("Printing users");
+		// System.out.println("Printing users");
 		return username + " : " + password;
 
 	}

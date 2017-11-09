@@ -186,8 +186,6 @@ public class SignUpTest extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
-				
 				
 				this.dispose();
 				backToLoginPage.setVisible(true);
