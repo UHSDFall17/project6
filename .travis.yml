@@ -1,11 +1,7 @@
 language: java
-rvm:
-    - 8
-    - 9
-    - 7
-    - 6
-email:
-    - epierre-jerome@uh.edu
-    - aravishankar2@uh.edu
-    -qdinh2@uh.edu
-    - ... (DO NOT INCLUDE MY EMAIL ADDRESS)
+notifications:
+  email:
+    recipients:
+      - epierrej@uh.edu.com
+      - aravishankar2@uh.edu.com
+      - qdinh2@uh.edu
