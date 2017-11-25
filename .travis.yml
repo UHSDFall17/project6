@@ -4,4 +4,8 @@ notifications:
     recipients:
       - epierrej@uh.edu.com
       - aravishankar2@uh.edu.com
+<<<<<<< HEAD
       - qdinh2@uh.edu
+=======
+      - qdinh2@uh.edu
+>>>>>>> origin/master
