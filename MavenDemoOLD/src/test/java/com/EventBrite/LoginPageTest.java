@@ -28,11 +28,11 @@ public class LoginPageTest extends JFrame {
 	private JTextField password;
 	static EventPageTest eventPage;
 	static LoginPageTest loginPage;
+	//public static UserDatabaseTest loggedInAs;
 	static ArrayList<UserDatabaseTest> theUsers;
 	static ArrayList<EventDatabaseTest> theEvents;
 	static int numOfEvents = 0;
 	static int numOfUsers = 0;
-	String loggedInAs;
 
 	// Launch the application.
 	
@@ -52,7 +52,7 @@ public class LoginPageTest extends JFrame {
 		}
 		*/
 		
-		eventPage = new EventPageTest(theEvents);
+		eventPage = new EventPageTest(theEvents, theUsers);
 		loginPage = new LoginPageTest(theUsers);
 
 		EventQueue.invokeLater(new Runnable() {
@@ -116,8 +116,13 @@ public class LoginPageTest extends JFrame {
 					asset = 7;
 					continue;
 				}
-				if (asset == 7) {
+				if(asset == 7) {
 					theEvents.get(numOfEvents).setTime(line);
+					asset = 8;
+					continue;
+				}
+				if (asset == 8) {
+					theEvents.get(numOfEvents).setTicketPrice(line);
 					asset = 0;
 					numOfEvents++;
 					continue;
@@ -214,7 +219,8 @@ public class LoginPageTest extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < theUsers.size(); i++) {
 					if (theUsers.get(i).loggingIn(username.getText(), password.getText())) {
-						//System.out.println("Successfully logged in with " + theUsers.get(i).username);
+						
+						theUsers.get(i).loggedIn = true;
 						loginPage.dispose();
 						eventPage.setVisible(true);
 						break;

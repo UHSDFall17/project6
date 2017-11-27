@@ -1,0 +1,10 @@
+language: java
+rvm:
+    - 8
+    - 9
+    - 7
+    - 6
+email:
+    - epierre-jerome@uh.edu
+    - aravishankar2@uh.edu
+    - ... (DO NOT INCLUDE MY EMAIL ADDRESS)

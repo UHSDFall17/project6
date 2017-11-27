@@ -2,24 +2,22 @@ package com.EventBrite;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import java.awt.Panel;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class LoginPageTest extends JFrame {
 
@@ -28,31 +26,32 @@ public class LoginPageTest extends JFrame {
 	private JTextField password;
 	static EventPageTest eventPage;
 	static LoginPageTest loginPage;
-	//public static UserDatabaseTest loggedInAs;
+	public static UserDatabaseTest loggedInAs = new UserDatabaseTest();
 	static ArrayList<UserDatabaseTest> theUsers;
 	static ArrayList<EventDatabaseTest> theEvents;
+	static ArrayList<String> corpCodes = new ArrayList<String>();
 	static int numOfEvents = 0;
 	static int numOfUsers = 0;
+	private JPasswordField corpField;
 
 	// Launch the application.
-	
+
 	public static void main(String[] args) {
-		
-		//Create the lists of users and events
-		//Call these only once
+
+		// Create the lists of users and events
+		// Call these only once
 		theUsers = InitUserData();
 		theEvents = InitEventData();
-		
-		//Check that info was read in properly
-		/*for(int i=0; i<numOfUsers; i++) {
-			System.out.println(theUsers.get(i).username);
-		}
-		for(int i=0; i<numOfEvents; i++) {
-			System.out.println(theEvents.get(i).title);
-		}
-		*/
-		
-		eventPage = new EventPageTest(theEvents, theUsers);
+		InitCorpCodes();
+
+		// Check that info was read in properly
+		/*
+		 * for(int i=0; i<numOfUsers; i++) {
+		 * System.out.println(theUsers.get(i).username); } for(int i=0; i<numOfEvents;
+		 * i++) { System.out.println(theEvents.get(i).title); }
+		 */
+
+		//eventPage = new EventPageTest(theEvents, theUsers, loggedInAs);
 		loginPage = new LoginPageTest(theUsers);
 
 		EventQueue.invokeLater(new Runnable() {
@@ -65,9 +64,29 @@ public class LoginPageTest extends JFrame {
 			}
 		});
 	}
-	//Read in Event Data
+
+	public static void InitCorpCodes() {
+		try {
+			File file = new File("Corporate Codes.txt");
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			// int x = 0;
+
+			while ((line = bufferedReader.readLine()) != null) {
+				//System.out.println(line);
+				corpCodes.add(line);
+			}
+			fileReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Read in Event Data
 	public static ArrayList<EventDatabaseTest> InitEventData() {
-		ArrayList<EventDatabaseTest> theEvents= new ArrayList<EventDatabaseTest>();
+		ArrayList<EventDatabaseTest> theEvents = new ArrayList<EventDatabaseTest>();
 		int asset = 0;
 		try {
 			File file = new File("Fake Events.txt");
@@ -75,10 +94,10 @@ public class LoginPageTest extends JFrame {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			StringBuffer stringBuffer = new StringBuffer();
 			String line;
-			//int x = 0;
+			// int x = 0;
 
 			while ((line = bufferedReader.readLine()) != null) {
-				//System.out.println("Reading line " + line);
+				// System.out.println("Reading line " + line);
 				if (asset == 0) {
 					theEvents.add(new EventDatabaseTest());
 					theEvents.get(numOfEvents).setTitle(line);
@@ -95,7 +114,7 @@ public class LoginPageTest extends JFrame {
 					asset = 3;
 					continue;
 				}
-				
+
 				if (asset == 3) {
 					theEvents.get(numOfEvents).setCity(line);
 					asset = 4;
@@ -106,17 +125,17 @@ public class LoginPageTest extends JFrame {
 					asset = 5;
 					continue;
 				}
-				if(asset == 5) {
+				if (asset == 5) {
 					theEvents.get(numOfEvents).setBuildingNum(line);
 					asset = 6;
 					continue;
 				}
-				if(asset == 6) {
+				if (asset == 6) {
 					theEvents.get(numOfEvents).setStreet(line);
 					asset = 7;
 					continue;
 				}
-				if(asset == 7) {
+				if (asset == 7) {
 					theEvents.get(numOfEvents).setTime(line);
 					asset = 8;
 					continue;
@@ -134,20 +153,20 @@ public class LoginPageTest extends JFrame {
 		}
 		return theEvents;
 	}
-	
-	//Read in User Data
+
+	// Read in User Data
 	public static ArrayList<UserDatabaseTest> InitUserData() {
-		//System.out.println("Initialising");
+		// System.out.println("Initialising");
 		theUsers = new ArrayList<UserDatabaseTest>();
 		try {
-			//System.out.println("Trying");
-			
+			// System.out.println("Trying");
+
 			File file = new File("Fake Users.txt");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			StringBuffer stringBuffer = new StringBuffer();
 			String line;
-			//int x = 0;
+			// int x = 0;
 			int userPassMail = 0;
 			boolean isUsername = true;
 
@@ -176,7 +195,6 @@ public class LoginPageTest extends JFrame {
 		}
 		return theUsers;
 	}
-	
 
 	// Create the frame.
 	public LoginPageTest(final ArrayList<UserDatabaseTest> theUsers) {
@@ -197,6 +215,10 @@ public class LoginPageTest extends JFrame {
 		password.setBounds(172, 116, 116, 22);
 		contentPane.add(password);
 
+		corpField = new JPasswordField();
+		corpField.setBounds(172, 151, 116, 22);
+		contentPane.add(corpField);
+
 		JLabel label = new JLabel("Username");
 		label.setBounds(80, 84, 90, 16);
 		contentPane.add(label);
@@ -211,18 +233,37 @@ public class LoginPageTest extends JFrame {
 		contentPane.add(lblEventbrite);
 
 		final JLabel label_1 = new JLabel("");
-		label_1.setBounds(133, 218, 198, 22);
+		label_1.setBounds(132, 218, 198, 22);
 		contentPane.add(label_1);
+
+		JLabel lblCorporateUser = new JLabel("Corporate User?");
+		lblCorporateUser.setBounds(57, 154, 113, 16);
+		contentPane.add(lblCorporateUser);
 
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < theUsers.size(); i++) {
 					if (theUsers.get(i).loggingIn(username.getText(), password.getText())) {
+						for (int y = 0; y < corpCodes.size(); y++) {
+							if (corpCodes.get(y).equals(corpField.getText())) {
+								theUsers.get(i).isCorporate = true;
+							}
+							else if(!corpCodes.get(y).equals(corpField.getText()) && !corpField.getText().equals("")) {
+								label_1.setText(String.valueOf("Incorrect Corporate Code"));
+							}
+						}
+						
 						
 						theUsers.get(i).loggedIn = true;
+						loggedInAs = theUsers.get(i);
+						
+						eventPage = new EventPageTest(theEvents, theUsers, loggedInAs);
+						
 						loginPage.dispose();
 						eventPage.setVisible(true);
+						
 						break;
 					} else if (i == theUsers.size() - 1) {
 						/*
@@ -235,20 +276,20 @@ public class LoginPageTest extends JFrame {
 				}
 			}
 		});
-		btnLogIn.setBounds(90, 151, 97, 25);
+		btnLogIn.setBounds(51, 183, 97, 25);
 		contentPane.add(btnLogIn);
 
 		JButton btnCreateAccount = new JButton("Create an Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(theUsers.size());
+				// System.out.println(theUsers.size());
 				SignUpTest signUp = new SignUpTest(theUsers, loginPage);
 				signUp.setVisible(true);
 				loginPage.dispose();
 			}
 		});
 
-		btnCreateAccount.setBounds(199, 151, 148, 25);
+		btnCreateAccount.setBounds(172, 183, 148, 25);
 		contentPane.add(btnCreateAccount);
 
 	}

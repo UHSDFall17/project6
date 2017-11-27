@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.awt.Panel;
 import java.awt.Color;
@@ -33,7 +34,8 @@ public class EventPageTest extends JFrame {
 	private JButton btnLookForEvent;
 	EventDetailsTest eventDetailPage;
 	UserDatabaseTest whoAmI;
-	//ArrayList<EventDatabaseTest> thisEvent;
+	ArrayList<EventDatabaseTest> theEvents;
+	// ArrayList<EventDatabaseTest> thisEvent;
 
 	static int numOfEvents; // Number of events in the system
 
@@ -60,7 +62,14 @@ public class EventPageTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EventPageTest(final ArrayList<EventDatabaseTest> theEvents, final ArrayList<UserDatabaseTest> theUsers) {
+	public EventPageTest(final ArrayList<EventDatabaseTest> Events, final ArrayList<UserDatabaseTest> theUsers,
+			UserDatabaseTest loggedInAs) {
+		theEvents = Events;
+		
+		if(loggedInAs.isCorporate == true) {
+			CutPrices();
+		}
+		
 		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -131,7 +140,7 @@ public class EventPageTest extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					for (int x = 0; x < theEvents.size(); x++) {
 						if (b.getText().equals(theEvents.get(x).title)) {
-							
+
 							eventDetailPage = new EventDetailsTest(theEvents.get(x), theUsers);
 						}
 					}
@@ -148,10 +157,15 @@ public class EventPageTest extends JFrame {
 		this.dispose();
 	}
 
-public boolean SearchForEvent() {
-	return true;
-	
-}
-
+	public void CutPrices() {
+		for(int x = 0; x<theEvents.size(); x++) {
+			double salePrice = Double.parseDouble(theEvents.get(x).ticketPrice)*0.6;
+			
+			DecimalFormat df = new DecimalFormat("#.00");
+			String salePriceFormated = df.format(salePrice);
+			
+			theEvents.get(x).ticketPrice = String.valueOf(salePriceFormated);
+		}
+	}
 
 }

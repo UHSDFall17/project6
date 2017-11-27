@@ -8,6 +8,7 @@ import java.io.IOException;
 public class UserDatabaseTest {
 
 	public String username, password, email;
+	boolean isCorporate = false;
 	boolean loggedIn = false;
 
 	public UserDatabaseTest(String name, String pass, String mail) {

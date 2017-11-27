@@ -32,6 +32,8 @@ public class EventPageTest extends JFrame {
 	private JTextField txtState;
 	private JButton btnLookForEvent;
 	EventDetailsTest eventDetailPage;
+	UserDatabaseTest whoAmI;
+	//ArrayList<EventDatabaseTest> thisEvent;
 
 	static int numOfEvents; // Number of events in the system
 
@@ -58,9 +60,8 @@ public class EventPageTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EventPageTest(final ArrayList<EventDatabaseTest> theEvents) {
-		// System.out.println(theEvents.get(0).title);
-		// System.out.println(theEvents.get(0).city);
+	public EventPageTest(final ArrayList<EventDatabaseTest> theEvents, final ArrayList<UserDatabaseTest> theUsers) {
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1011, 617);
@@ -130,7 +131,8 @@ public class EventPageTest extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					for (int x = 0; x < theEvents.size(); x++) {
 						if (b.getText().equals(theEvents.get(x).title)) {
-							eventDetailPage = new EventDetailsTest(theEvents.get(x));
+							
+							eventDetailPage = new EventDetailsTest(theEvents.get(x), theUsers);
 						}
 					}
 					eventDetailPage.setVisible(true);
@@ -145,4 +147,11 @@ public class EventPageTest extends JFrame {
 	public void DisposeThisPage() {
 		this.dispose();
 	}
+
+public boolean SearchForEvent() {
+	return true;
+	
+}
+
+
 }
