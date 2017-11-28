@@ -2,12 +2,12 @@ package com.EventBrite;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
 public class NewUserJUnitTest {
-	static ArrayList<UserDatabaseTest> theUsers;
+	static HashMap<String ,UserDatabaseTest> theUsers;
 
 	@Test
 	public void test() {

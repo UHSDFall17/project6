@@ -35,7 +35,7 @@ public class EventDetailsTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EventDetailsTest(final EventDatabaseTest theEvent, final ArrayList<UserDatabaseTest> theUsers) {
+	public EventDetailsTest(final EventDatabaseTest theEvent, final UserDatabaseTest user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -93,7 +93,7 @@ public class EventDetailsTest extends JFrame {
 		btnBookTickets.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				TransactionTest paymentPage = new TransactionTest(theEvent, theUsers);
+				TransactionTest paymentPage = new TransactionTest(theEvent, user);
 				paymentPage.setVisible(true);
 				Dispose();
 			}
