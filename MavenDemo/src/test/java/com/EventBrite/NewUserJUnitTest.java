@@ -2,25 +2,45 @@ package com.EventBrite;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class NewUserJUnitTest {
-	static HashMap<String ,UserDatabaseTest> theUsers;
+	
+	LoginPageTest logIn;
+	ArrayList<UserDatabaseTest> theUsers;
+	ArrayList<EventDatabaseTest> theEvents;
+	ArrayList<String> theCodes;
+	SignUpTest signUp;
+	boolean newUser;
 
-	@Test
-	public void test() {
-		LoginPageTest logIn = new LoginPageTest(theUsers);
-		theUsers = logIn.InitUserData();
-		SignUpTest signUp = new SignUpTest(theUsers, logIn);
-		boolean newUser = signUp.IExist("Mazdamundi");
-		assertEquals(true, newUser);
-		//fail("Not yet implemented");
+@Before
+public void Setup() {
+		logIn = new LoginPageTest();
+		LoginPageTest.initialize();
+		theUsers = LoginPageTest.InitUserData();
+		theEvents = LoginPageTest.InitEventData();
+		theCodes = logIn.InitCorpCodes();
+		signUp = new SignUpTest(theUsers, logIn);
 	}
+	@Test
+	public void userExists() {
+		newUser = signUp.IExist("KarlFranz");
+		assertEquals(true, newUser);
 
+	}
+	@Test
+	public void userDoesNotExist() {
+
+		newUser = signUp.IExist("Settra");
+		assertEquals(false, newUser);
+		
+	}
 	
-	
-	
-	
+
+
+
 }
