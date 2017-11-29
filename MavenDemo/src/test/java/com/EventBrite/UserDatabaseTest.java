@@ -72,15 +72,16 @@ public class UserDatabaseTest {
 	}
 
 	public boolean loggedIn() {
-
 		return loggedIn;
+	}
+
+	public boolean getCorporate() {
+		return isCorporate;
 
 	}
 
-	public String printUsers() {
-		// System.out.println("Printing users");
-		return username + " : " + password;
-
+	public void setCorporate(boolean changeCorp) {
+		isCorporate = changeCorp;
 	}
 
 }

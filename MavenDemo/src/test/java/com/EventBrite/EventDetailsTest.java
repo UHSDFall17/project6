@@ -9,12 +9,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class EventDetailsTest extends JFrame {
 
 	private JPanel contentPane;
+	EventDatabaseTest theEvent;
 
 	/**
 	 * Launch the application.
@@ -35,7 +38,13 @@ public class EventDetailsTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EventDetailsTest(final EventDatabaseTest theEvent, final ArrayList<UserDatabaseTest> theUsers, final UserDatabaseTest loggedUser) {
+	public EventDetailsTest(ReadInDataTest librarian, int eventIndex, final UserDatabaseTest loggedUser) {
+		theEvent = librarian.getTheEvents().get(eventIndex);
+		if(loggedUser.getCorporate()) {
+			theEvent.setTicketPrice(CutPrice(theEvent));
+		}
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -93,7 +102,7 @@ public class EventDetailsTest extends JFrame {
 		btnBookTickets.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				TransactionTest paymentPage = new TransactionTest(theEvent, theUsers, loggedUser);
+				TransactionTest paymentPage = new TransactionTest(theEvent, loggedUser);
 				paymentPage.setVisible(true);
 				Dispose();
 			}
@@ -106,5 +115,10 @@ public class EventDetailsTest extends JFrame {
 	public void Dispose() {
 		this.dispose();
 	}
-
+	public String CutPrice(EventDatabaseTest event){
+		double salePrice = Double.parseDouble(event.getTicketPrice()) * 0.6;
+		NumberFormat formatter = new DecimalFormat("#0.00");
+		String newPrice = String.valueOf(formatter.format(salePrice));
+		return newPrice;
+	}
 }

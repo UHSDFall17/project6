@@ -5,64 +5,36 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JCheckBox;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
+import javax.swing.JLabel;
 
 public class LoginPageTest extends JFrame {
 
 	private JPanel contentPane;
+	private JPasswordField corpField;
 	private JTextField username;
 	private JTextField password;
-	static EventPageTest eventPage;
-	static LoginPageTest loginPage;
-	public static UserDatabaseTest loggedInAs = new UserDatabaseTest();
-	static ArrayList<UserDatabaseTest> theUsers;
-	static ArrayList<EventDatabaseTest> theEvents;
-	static ArrayList<String> corpCodes;
-	static int numOfEvents = 0;
-	 static int numOfUsers = 0;
-	private JPasswordField corpField;
-	boolean corpInput = false;
-	private boolean corpCodeCorrect = false;
-	private boolean userInfoCorrect = false;
-	private int foundUserIndex;
-	private boolean goodToGo = false;
+	UserDatabaseTest loggedInAs = new UserDatabaseTest();
+	AuthenticationTest warden = new AuthenticationTest();
+	EventPageTest eventPage;
 
-	// Launch the application.
-
-	public static void initialize() {
-		 numOfEvents = 0;
-		numOfUsers = 0;
-		
-		
-	}
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
-
-		// Create the lists of users and events
-		// Call these only once
-		theUsers = InitUserData();
-		theEvents = InitEventData();
-		corpCodes = InitCorpCodes();
-
-		loginPage = new LoginPageTest();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					LoginPageTest loginPage = new LoginPageTest();
 					loginPage.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,146 +43,12 @@ public class LoginPageTest extends JFrame {
 		});
 	}
 
-	public static ArrayList InitCorpCodes() {
-		ArrayList<String> theCodes = new ArrayList<String>();
-		try {
-			File file = new File("Corporate Codes.txt");
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			// int x = 0;
-
-			while ((line = bufferedReader.readLine()) != null) {
-				// System.out.println(line);
-				theCodes.add(line);
-			}
-			fileReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return theCodes;
-	}
-
-	// Read in Event Data
-	public static ArrayList<EventDatabaseTest> InitEventData() {
-		ArrayList<EventDatabaseTest> theEvents = new ArrayList<EventDatabaseTest>();
-		int asset = 0;
-		try {
-			File file = new File("Fake Events.txt");
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			// int x = 0;
-
-			while ((line = bufferedReader.readLine()) != null) {
-				// System.out.println("Reading line " + line);
-				if (asset == 0) {
-					theEvents.add(new EventDatabaseTest());
-					theEvents.get(numOfEvents).setTitle(line);
-					asset = 1;
-					continue;
-				}
-				if (asset == 1) {
-					theEvents.get(numOfEvents).setDay(line);
-					asset = 2;
-					continue;
-				}
-				if (asset == 2) {
-					theEvents.get(numOfEvents).setMonth(line);
-					asset = 3;
-					continue;
-				}
-
-				if (asset == 3) {
-					theEvents.get(numOfEvents).setCity(line);
-					asset = 4;
-					continue;
-				}
-				if (asset == 4) {
-					theEvents.get(numOfEvents).setState(line);
-					asset = 5;
-					continue;
-				}
-				if (asset == 5) {
-					theEvents.get(numOfEvents).setBuildingNum(line);
-					asset = 6;
-					continue;
-				}
-				if (asset == 6) {
-					theEvents.get(numOfEvents).setStreet(line);
-					asset = 7;
-					continue;
-				}
-				if (asset == 7) {
-					theEvents.get(numOfEvents).setTime(line);
-					asset = 8;
-					continue;
-				}
-				if (asset == 8) {
-					theEvents.get(numOfEvents).setTicketPrice(line);
-					asset = 0;
-					numOfEvents++;
-					continue;
-				}
-			}
-			fileReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return theEvents;
-	}
-
-	// Read in User Data
-	public static ArrayList<UserDatabaseTest> InitUserData() {
-		// System.out.println("Initialising");
-		theUsers = new ArrayList<UserDatabaseTest>();
-		try {
-			// System.out.println("Trying");
-
-			File file = new File("Fake Users.txt");
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			// int x = 0;
-			int userPassMail = 0;
-			boolean isUsername = true;
-
-			while ((line = bufferedReader.readLine()) != null) {
-
-				if (userPassMail == 0) {
-					theUsers.add(new UserDatabaseTest());
-					System.out.println(theUsers.size() + " " + numOfUsers);
-
-					theUsers.get(numOfUsers).setUsername(line);
-					userPassMail = 1;
-					continue;
-				}
-				if (userPassMail == 1) {
-					theUsers.get(numOfUsers).setPassword(line);
-					userPassMail = 2;
-					continue;
-				}
-				if (userPassMail == 2) {
-					theUsers.get(numOfUsers).setEmail(line);
-					userPassMail = 0;
-				}
-
-				numOfUsers++;
-			}
-			fileReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return theUsers;
-	}
-
-	// Create the frame.
+	/**
+	 * Create the frame.
+	 */
 	public LoginPageTest() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 448);
+		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -238,6 +76,31 @@ public class LoginPageTest extends JFrame {
 		lblPassword.setBounds(80, 119, 68, 16);
 		contentPane.add(lblPassword);
 
+		JButton btnLogIn = new JButton("Log In");
+		btnLogIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				warden.Authenticate(username.getText(), password.getText(), amICorporate.isSelected(),
+						corpField.getPassword());
+				
+				if (warden.getCredValidation()) {
+					// Log in as Normal
+					if (warden.getCorpValidation() == 0) {
+						eventPage = new EventPageTest(warden.getReader(), warden.getLoggedUser());
+						eventPage.setVisible(true);
+					}
+					if (warden.getCorpValidation() == 1) {
+						eventPage = new EventPageTest(warden.getReader(), warden.getLoggedUser());
+						eventPage.setVisible(true);
+					}
+					if (warden.getCorpValidation() == 2) {
+
+					}
+				}
+			}
+		});
+		btnLogIn.setBounds(73, 251, 97, 25);
+		contentPane.add(btnLogIn);
+
 		JLabel lblEventbrite = new JLabel("EventBrite");
 		lblEventbrite.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		lblEventbrite.setBounds(172, 13, 102, 42);
@@ -264,80 +127,10 @@ public class LoginPageTest extends JFrame {
 			}
 		});
 
-		JButton btnLogIn = new JButton("Log In");
-		btnLogIn.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {
-				if (corpField.getText().equals("")) {
-					corpInput = false;
-				} else {
-					corpInput = true;
-				}
-				login_loop: for (int i = 0; i < theUsers.size(); i++) {
-					if (theUsers.get(i).loggingIn(username.getText(), password.getText())) {
-						userInfoCorrect = true;
-						foundUserIndex = i;
-						if (amICorporate.isSelected()) {
-
-							SearchCorporateCodes(corpField.getText());
-
-							/*
-							 * for (int y = 0; y < corpCodes.size(); y++) { if
-							 * (corpCodes.get(y).equals(corpField.getText())) {
-							 * System.out.println("Corporate code match found"); corpCodeCorrect = true;
-							 * break; } else if (!corpCodes.get(y).equals(corpField.getText())) {
-							 * System.out.println("not a code match");
-							 * ErrorMessage.setText(String.valueOf("Incorrect Corporate Code"));
-							 * 
-							 * } }
-							 */
-						}
-
-						if (userInfoCorrect) {
-							if (corpCodeCorrect && amICorporate.isSelected()) {
-								theUsers.get(foundUserIndex).isCorporate = true;
-								goodToGo = true;
-							} else if (amICorporate.isSelected() && !corpCodeCorrect) {
-								ErrorMessage.setText(String.valueOf("Please enter the correct code"));
-							} else if (!amICorporate.isSelected() && !corpInput) {
-								goodToGo = true;
-							}
-
-						}
-
-						break;
-					} else if (i == theUsers.size() - 1) {
-						/*
-						 * JOptionPane.showMessageDialog(null, "Incorrect Username or Password",
-						 * "Failed to log in", JOptionPane.INFORMATION_MESSAGE);
-						 */
-						ErrorMessage.setText(String.valueOf("Incorrect username or password"));
-						break;
-					}
-				}
-				if (goodToGo) {
-					
-					
-					theUsers.get(foundUserIndex).loggedIn = true;
-					loggedInAs = theUsers.get(foundUserIndex);
-
-					eventPage = new EventPageTest(theEvents, theUsers, loggedInAs);
-
-					loginPage.dispose();
-					eventPage.setVisible(true);
-				}
-
-			}
-		});
-		btnLogIn.setBounds(73, 251, 97, 25);
-		contentPane.add(btnLogIn);
-
 		JButton btnCreateAccount = new JButton("Create an Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SignUpTest signUp = new SignUpTest(theUsers, loginPage);
-				signUp.setVisible(true);
-				loginPage.dispose();
+
 			}
 		});
 
@@ -347,16 +140,5 @@ public class LoginPageTest extends JFrame {
 		JLabel lblNewLabel = new JLabel("Corporate User?");
 		lblNewLabel.setBounds(57, 151, 113, 16);
 		contentPane.add(lblNewLabel);
-
-	}
-
- boolean SearchCorporateCodes(String corpText) {
-		for (int y = 0; y < corpCodes.size(); y++) {
-			if (corpCodes.get(y).equals(corpField.getText())) {
-				corpCodeCorrect = true;
-				break;
-			}
-		}
-		return corpCodeCorrect;
 	}
 }

@@ -47,8 +47,7 @@ public class TransactionTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TransactionTest(EventDatabaseTest theEvent, ArrayList<UserDatabaseTest> theUsers,
-			final UserDatabaseTest loggedUser) {
+	public TransactionTest(EventDatabaseTest theEvent, final UserDatabaseTest loggedUser) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 567, 304);
 		contentPane = new JPanel();
@@ -121,7 +120,7 @@ public class TransactionTest extends JFrame {
 		finalizePurchaseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(loggedUser.isCorporate) {
+				if(loggedUser.getCorporate()) {
 					int buying = Integer.parseInt(howManyToBuy.getText());
 					if(buying>corporateLimit) {
 						overLimit = true;
@@ -134,10 +133,6 @@ public class TransactionTest extends JFrame {
 						ErrorMessage.setText(String.valueOf("Ticket limit of 5 per purchase"));
 					}
 				}
-				
-				
-				
-				
 				
 				
 				if (NameOnCard.getText().equals("") || BillingAddress.getText().equals("")
@@ -157,10 +152,10 @@ public class TransactionTest extends JFrame {
 		contentPane.add(lblNumberOfTickets);
 		
 
-		for (int i = 0; i < theUsers.size(); i++) {
+		/*for (int i = 0; i < theUsers.size(); i++) {
 			if (theUsers.get(i).loggedIn == true) {
 				WhoAmI.setText(theUsers.get(i).username);
 			}
-		}
+		}*/
 	}
 }
