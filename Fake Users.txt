@@ -1,0 +1,36 @@
+<<<<<<< HEAD:Fake Users.txt
+KarlFranz
+PrinceandEmperor
+kfaltdorf@Empire.gov
+Mazdamundi
+Mazdamoney
+mazhexoatl@lzd.old
+Queek
+Headtaker
+queekisbestskaven@mors.skv
+Volkmar
+theGrim
+theogonist@Empire.gov
+PedroKantor
+CrimsonFist
+crimsonrynn@ast.gov
+=======
+KarlFranz
+PrinceandEmperor
+kfaltdorf@Empire.gov
+Mazdamundi
+Mazdamoney
+mazhexoatl@lzd.old
+Queek
+Headtaker
+queekisbestskaven@mors.skv
+Volkmar
+theGrim
+theogonist@Empire.gov
+PedroKantor
+CrimsonFist
+crimsonrynn@ast.gov
+Settra
+Imperishable
+priestking@nehek.gov
+>>>>>>> 20de1b389d08813492327e518a63d16b3ce26e21:MavenDemo/Fake Users.txt
