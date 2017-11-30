@@ -33,9 +33,9 @@ public class SignUpTest extends JFrame {
 	private JTextField txtUsername;
 	private JTextField txtPassword;
 	private JTextField txtEmail;
-	static ArrayList<UserDatabaseTest> knownUsers = new ArrayList<UserDatabaseTest>();
+	static ArrayList<UserDatabaseTest> knownUsers;
 	static int x = 0; // Number of users
-	private JLabel lblNewLabel;
+	private JLabel errorMessage;
 	boolean exists;
 	LoginPageTest backToLoginPage;
 
@@ -55,47 +55,6 @@ public class SignUpTest extends JFrame {
 			}
 		});
 	}
-
-	/*public static void InitTestData() {
-		try {
-			File file = new File("Fake Users.txt");
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			int userPassMail = 0;
-			boolean isUsername = true;
-
-			while ((line = bufferedReader.readLine()) != null) {
-				// System.out.println(line);
-				if (userPassMail == 0) {
-					theUsers.add(new UserDatabaseTest());
-					theUsers.get(x).setUsername(line);
-					userPassMail = 1;
-					continue;
-				}
-				if (userPassMail == 1) {
-					theUsers.get(x).setPassword(line);
-					userPassMail = 2;
-					continue;
-				}
-				if (userPassMail == 2) {
-					theUsers.get(x).setEmail(line);
-					userPassMail = 0;
-				}
-
-				x++;
-			}
-
-			fileReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		 for (int i = 0; i < x; i++) { System.out.println(theUsers.get(i).username); }
-		 
-	}
-*/
 
 	/**
 	 * Create the frame.
@@ -132,60 +91,37 @@ public class SignUpTest extends JFrame {
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(txtUsername.getText());
 				
-				exists = IExist(txtUsername.getText());
+				exists = IExist(txtUsername.getText(), txtEmail.getText());
 			}
 		});
 		btnSubmit.setBounds(208, 84, 97, 25);
 		contentPane.add(btnSubmit);
 
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(80, 155, 187, 16);
-		contentPane.add(lblNewLabel);
+		errorMessage = new JLabel("");
+		errorMessage.setBounds(80, 155, 187, 16);
+		contentPane.add(errorMessage);
 		if(exists) {
 			System.out.println("Here's a user");
-			lblNewLabel.setText("Username already Exists");
+			errorMessage.setText("Username already Exists");
 		}
 		
 	}
 
-	public boolean IExist(String inputName) {
+	public boolean IExist(String inputName, String inputEmail) {
 		//System.out.println("checking database of size " + knownUsers.size());
 		for (int i = 0; i < knownUsers.size(); i++) {
-			//System.out.println("Checking " + knownUsers.get(i).username + " with " + inputName);
 			if (knownUsers.get(i).username.equals(inputName)) {
-				//System.out.println("Found one");
-				lblNewLabel.setText("Username already Exists");
+				errorMessage.setText("Username already Exists");
+				return true;
+			}else if (knownUsers.get(i).email.equals(inputEmail)) {
+				errorMessage.setText("Email already in use");
 				return true;
 			}else if(txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtEmail.getText().equals("Email")) {
-				lblNewLabel.setText("Unique information required");
+				errorMessage.setText("Unique information required");
 			}
-			// System.out.println("username already exists");
 			else {
-				//add to user list
-			
-					try {
-						Writer output = new BufferedWriter(new FileWriter("Fake Users.txt", true));
-						output.append("\n");
-						output.append(txtUsername.getText());
-						output.append("\n");
-						output.append(txtPassword.getText());
-						output.append("\n");
-						output.append(txtEmail.getText());
-						output.close();
-						
-						x++;
-						
-						knownUsers.add(new UserDatabaseTest());
-						knownUsers.get(x).setUsername(txtUsername.getText());
-						knownUsers.get(x).setPassword(txtPassword.getText());
-						knownUsers.get(x).setEmail(txtEmail.getText());
-						
-						} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				WriteToUserList();
 				
 				this.dispose();
 				backToLoginPage.setVisible(true);
@@ -194,5 +130,29 @@ public class SignUpTest extends JFrame {
 		}
 
 		return false;
+	}
+	public void WriteToUserList() {
+		try {
+			Writer output = new BufferedWriter(new FileWriter("Fake Users.txt", true));
+			
+			output.append("\n");
+			output.append(txtUsername.getText());
+			output.append("\n");
+			
+			output.append(txtPassword.getText());
+			output.append("\n");
+			
+			output.append(txtEmail.getText());
+			output.close();
+			
+			knownUsers.add(new UserDatabaseTest());
+			knownUsers.get(x).setUsername(txtUsername.getText());
+			knownUsers.get(x).setPassword(txtPassword.getText());
+			knownUsers.get(x).setEmail(txtEmail.getText());
+			
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

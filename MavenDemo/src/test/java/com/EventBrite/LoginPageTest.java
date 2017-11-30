@@ -23,8 +23,9 @@ public class LoginPageTest extends JFrame {
 	private JTextField username;
 	private JTextField password;
 	UserDatabaseTest loggedInAs = new UserDatabaseTest();
-	AuthenticationTest warden = new AuthenticationTest();
 	EventPageTest eventPage;
+	LoginPageTest loginPage;
+	AuthenticationTest warden;
 
 	/**
 	 * Launch the application.
@@ -34,8 +35,6 @@ public class LoginPageTest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginPageTest loginPage = new LoginPageTest();
-					loginPage.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,13 +45,20 @@ public class LoginPageTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginPageTest() {
+	public LoginPageTest(final AuthenticationTest theWarden) {
+		
+		warden = theWarden;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		final JLabel ErrorMessage = new JLabel("");
+		ErrorMessage.setBounds(104, 216, 198, 22);
+		contentPane.add(ErrorMessage);
 
 		username = new JTextField();
 		username.setBounds(172, 81, 116, 22);
@@ -79,22 +85,24 @@ public class LoginPageTest extends JFrame {
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				warden.Authenticate(username.getText(), password.getText(), amICorporate.isSelected(),
+				theWarden.Authenticate(username.getText(), password.getText(), amICorporate.isSelected(),
 						corpField.getPassword());
 				
-				if (warden.getCredValidation()) {
+				if (theWarden.getCredValidation()) {
 					// Log in as Normal
-					if (warden.getCorpValidation() == 0) {
-						eventPage = new EventPageTest(warden.getReader(), warden.getLoggedUser());
+					if (theWarden.getCorpValidation() == 0) {
+						eventPage = new EventPageTest(theWarden.getReader(), theWarden.getLoggedUser());
 						eventPage.setVisible(true);
 					}
-					if (warden.getCorpValidation() == 1) {
-						eventPage = new EventPageTest(warden.getReader(), warden.getLoggedUser());
+					if (theWarden.getCorpValidation() == 1) {
+						eventPage = new EventPageTest(theWarden.getReader(), theWarden.getLoggedUser());
 						eventPage.setVisible(true);
 					}
-					if (warden.getCorpValidation() == 2) {
-
+					if (theWarden.getCorpValidation() == 2) {
+						ErrorMessage.setText("Incorrect Corporate Code");
 					}
+				}else {
+					ErrorMessage.setText("Incorrect username or Password");
 				}
 			}
 		});
@@ -105,10 +113,6 @@ public class LoginPageTest extends JFrame {
 		lblEventbrite.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		lblEventbrite.setBounds(172, 13, 102, 42);
 		contentPane.add(lblEventbrite);
-
-		final JLabel ErrorMessage = new JLabel("");
-		ErrorMessage.setBounds(104, 216, 198, 22);
-		contentPane.add(ErrorMessage);
 
 		JLabel lblCorporateUser = new JLabel("Corporate User?");
 		lblCorporateUser.setBounds(57, 184, 113, 16);
@@ -130,7 +134,7 @@ public class LoginPageTest extends JFrame {
 		JButton btnCreateAccount = new JButton("Create an Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				GoToSignUp();
 			}
 		});
 
@@ -140,5 +144,9 @@ public class LoginPageTest extends JFrame {
 		JLabel lblNewLabel = new JLabel("Corporate User?");
 		lblNewLabel.setBounds(57, 151, 113, 16);
 		contentPane.add(lblNewLabel);
+	}
+	public void GoToSignUp() {
+		SignUpTest signUpPage = new SignUpTest(warden.getTheUsers(), this);
+		signUpPage.setVisible(true);
 	}
 }
