@@ -1,5 +1,7 @@
 package com.EventBrite;
 
+import java.util.ArrayList;
+
 public class AuthenticationTest {
 
 	private int corpCodeCorrect = 0;
@@ -7,6 +9,7 @@ public class AuthenticationTest {
 	private boolean goodToGoCorporate = false;
 	private boolean goodToGoNormal = false;
 	private int foundUserIndex;
+	private ArrayList<UserDatabaseTest> theUsers;
 	ReadInDataTest Reading;
 	UserDatabaseTest loggedInAs;
 
@@ -15,6 +18,7 @@ public class AuthenticationTest {
 		Reading.InitCorpCodes();
 		Reading.InitEventData();
 		Reading.InitUserData();
+		theUsers = Reading.getTheUsers();
 	}
 
 	public void Authenticate(String username, String password, boolean checkBox, char[] code) {
@@ -84,5 +88,8 @@ public class AuthenticationTest {
 
 	public UserDatabaseTest getLoggedUser() {
 		return loggedInAs;
+	}
+	public ArrayList<UserDatabaseTest> getTheUsers() {
+		return theUsers;
 	}
 }

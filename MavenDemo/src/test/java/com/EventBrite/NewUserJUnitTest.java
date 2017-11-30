@@ -14,32 +14,30 @@ public class NewUserJUnitTest {
 	ArrayList<UserDatabaseTest> theUsers;
 	ArrayList<EventDatabaseTest> theEvents;
 	ArrayList<String> theCodes;
-	SignUpTest signUp;
+	SignUpTest signUpPage;
 	boolean newUser;
 
 @Before
 public void Setup() {
-		logIn = new LoginPageTest();
-		LoginPageTest.initialize();
-		theUsers = LoginPageTest.InitUserData();
-		theEvents = LoginPageTest.InitEventData();
-		theCodes = logIn.InitCorpCodes();
-		signUp = new SignUpTest(theUsers, logIn);
+	AuthenticationTest warden = new AuthenticationTest();
+	ReadInDataTest librarian = warden.getReader();
+	LoginPageTest loginPage = new LoginPageTest(warden);
+	signUpPage = new SignUpTest(librarian.getTheUsers(), loginPage);
+	UserDatabaseTest loggedUser = librarian.getTheUsers().get(1);
+	loggedUser.setCorporate(true);
+	EventDatabaseTest theEvent = librarian.getTheEvents().get(1);
+	int eventIndex = 1;
 	}
 	@Test
-	public void userExists() {
-		newUser = signUp.IExist("KarlFranz");
+	public void UserExists() {
+		newUser = signUpPage.IExist("KarlFranz", "kfaltdorf@Empire.gov");
 		assertEquals(true, newUser);
-
 	}
 	@Test
-	public void userDoesNotExist() {
-
-		newUser = signUp.IExist("Settra");
+	public void UserDoesNotExist() {
+		newUser = signUpPage.IExist("Settra", "priestking@nehek.gov");
 		assertEquals(false, newUser);
-		
 	}
-	
 
 
 

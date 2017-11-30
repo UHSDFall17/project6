@@ -125,12 +125,18 @@ public class TransactionTest extends JFrame {
 					if(buying>corporateLimit) {
 						overLimit = true;
 						ErrorMessage.setText(String.valueOf("Ticket limit of 30 per purchase"));
+					}else if(buying<=corporateLimit) {
+						overLimit = false;
+						ErrorMessage.setText(String.valueOf(""));
 					}
 				}else if (!loggedUser.isCorporate) {
 					int buying = Integer.parseInt(howManyToBuy.getText());
 					if(buying>normalLimit) {
 						overLimit = true;
 						ErrorMessage.setText(String.valueOf("Ticket limit of 5 per purchase"));
+					}else if(buying<=normalLimit) {
+						overLimit = false;
+						ErrorMessage.setText(String.valueOf(""));
 					}
 				}
 				
