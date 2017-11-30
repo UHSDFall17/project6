@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CorporateJUnitTest {
-
+/*
 	@Before
 	public void Setup() {
 		AuthenticationTest warden = new AuthenticationTest();
@@ -18,7 +18,7 @@ public class CorporateJUnitTest {
 		int eventIndex = 1;
 	}
 
-	/*@Test
+	@Test
 	public void test() {
 		
 	}
