@@ -112,9 +112,17 @@ public class SignUpTest extends JFrame {
 		//System.out.println("checking database of size " + knownUsers.size());
 		for (int i = 0; i < knownUsers.size(); i++) {
 			if (knownUsers.get(i).username.equals(inputName)) {
+<<<<<<< HEAD
 				errorMessage.setText("Username already Exists");
 				return true;
 			}else if (knownUsers.get(i).email.equals(inputEmail)) {
+=======
+				//System.out.println("Found one");
+				errorMessage.setText("Username already Exists");
+				return true;
+			}else if (knownUsers.get(i).email.equals(inputEmail)) {
+				//System.out.println("Found one");
+>>>>>>> 2b37d0d1aa1b75edef56313df73398be4c17fca4
 				errorMessage.setText("Email already in use");
 				return true;
 			}else if(txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtEmail.getText().equals("Email")) {
@@ -122,6 +130,35 @@ public class SignUpTest extends JFrame {
 			}
 			else {
 				WriteToUserList();
+<<<<<<< HEAD
+=======
+			
+					try {
+						System.out.println("Writing to file");
+						Writer output = new BufferedWriter(new FileWriter("Fake Users.txt", true));
+						System.out.println("new line");
+						output.append("\n");
+						output.append(txtUsername.getText());
+						output.append("\n");
+						System.out.println("new line");
+						output.append(txtPassword.getText());
+						output.append("\n");
+						System.out.println("new line");
+						output.append(txtEmail.getText());
+						output.close();
+						
+						x++;
+						
+						knownUsers.add(new UserDatabaseTest());
+						knownUsers.get(x).setUsername(txtUsername.getText());
+						knownUsers.get(x).setPassword(txtPassword.getText());
+						knownUsers.get(x).setEmail(txtEmail.getText());
+						
+						} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+>>>>>>> 2b37d0d1aa1b75edef56313df73398be4c17fca4
 				
 				this.dispose();
 				backToLoginPage.setVisible(true);
@@ -132,6 +169,7 @@ public class SignUpTest extends JFrame {
 		return false;
 	}
 	public void WriteToUserList() {
+<<<<<<< HEAD
 		try {
 			Writer output = new BufferedWriter(new FileWriter("Fake Users.txt", true));
 			
@@ -154,5 +192,8 @@ public class SignUpTest extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+=======
+		
+>>>>>>> 2b37d0d1aa1b75edef56313df73398be4c17fca4
 	}
 }
