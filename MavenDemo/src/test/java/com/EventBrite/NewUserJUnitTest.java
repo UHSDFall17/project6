@@ -29,8 +29,13 @@ public void Setup() {
 	int eventIndex = 1;
 	}
 	@Test
-	public void UserExists() {
-		newUser = signUpPage.IExist("KarlFranz", "kfaltdorf@Empire.gov");
+	public void UserExistsUsername() {
+		newUser = signUpPage.IExist("KarlFranz", "theogonist@Empire.gov");
+		assertEquals(true, newUser);
+	}
+	@Test
+	public void UserExistsEmail() {
+		newUser = signUpPage.IExist("LuthorHuss", "kfaltdorf@Empire.gov");
 		assertEquals(true, newUser);
 	}
 	@Test
