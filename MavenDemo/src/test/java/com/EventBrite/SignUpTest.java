@@ -10,9 +10,19 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -23,15 +33,11 @@ public class SignUpTest extends JFrame {
 	private JTextField txtUsername;
 	private JTextField txtPassword;
 	private JTextField txtEmail;
-<<<<<<< HEAD
-	static ArrayList<UserDatabaseTest> knownUsers = new ArrayList<UserDatabaseTest>();
+	static ArrayList<UserDatabaseTest> knownUsers;
 	static int x = 0; // Number of users
-	private JLabel lblNewLabel;
+	private JLabel errorMessage;
 	boolean exists;
-=======
-	static ArrayList<UserDatabaseTest> theUsers = new ArrayList<UserDatabaseTest>();
-	static int x = 0; // Number of users
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
+	LoginPageTest backToLoginPage;
 
 	/**
 	 * Launch the application.
@@ -40,15 +46,9 @@ public class SignUpTest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-<<<<<<< HEAD
 					// InitTestData();
 					// SignUpTest frame = new SignUpTest();
 					// frame.setVisible(true);
-=======
-					InitTestData();
-					SignUpTest frame = new SignUpTest();
-					frame.setVisible(true);
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,68 +56,13 @@ public class SignUpTest extends JFrame {
 		});
 	}
 
-<<<<<<< HEAD
-	/*public static void InitTestData() {
-=======
-	public static void InitTestData() {
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
-		try {
-			File file = new File("Fake Users.txt");
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			int userPassMail = 0;
-			boolean isUsername = true;
-
-			while ((line = bufferedReader.readLine()) != null) {
-				// System.out.println(line);
-				if (userPassMail == 0) {
-					theUsers.add(new UserDatabaseTest());
-					theUsers.get(x).setUsername(line);
-					userPassMail = 1;
-					continue;
-				}
-				if (userPassMail == 1) {
-					theUsers.get(x).setPassword(line);
-					userPassMail = 2;
-					continue;
-				}
-				if (userPassMail == 2) {
-					theUsers.get(x).setEmail(line);
-					userPassMail = 0;
-				}
-
-				x++;
-			}
-
-			fileReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-<<<<<<< HEAD
-		
-		 for (int i = 0; i < x; i++) { System.out.println(theUsers.get(i).username); }
-		 
-	}
-*/
-=======
-		/*
-		 * for (int i = 0; i < x; i++) { System.out.println(theUsers.get(i).username); }
-		 */
-	}
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
-
 	/**
 	 * Create the frame.
 	 */
-<<<<<<< HEAD
-	public SignUpTest(ArrayList<UserDatabaseTest> theUsers) {
+	public SignUpTest(ArrayList<UserDatabaseTest> theUsers, LoginPageTest loginPage) {
 		knownUsers = theUsers;
+		backToLoginPage = loginPage;
 		
-=======
-	public SignUpTest() {
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -143,71 +88,80 @@ public class SignUpTest extends JFrame {
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 
-<<<<<<< HEAD
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(txtUsername.getText());
 				
-				exists = IExist(txtUsername.getText());
-=======
-		final JLabel lblUsernameAlreadyExists = new JLabel();
-		lblUsernameAlreadyExists.setBounds(80, 155, 176, 16);
-		contentPane.add(lblUsernameAlreadyExists);
-
-		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				IExist(txtUsername.getText());
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
+				exists = IExist(txtUsername.getText(), txtEmail.getText());
 			}
 		});
 		btnSubmit.setBounds(208, 84, 97, 25);
 		contentPane.add(btnSubmit);
-<<<<<<< HEAD
 
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(80, 155, 149, 16);
-		contentPane.add(lblNewLabel);
+		errorMessage = new JLabel("");
+		errorMessage.setBounds(80, 155, 187, 16);
+		contentPane.add(errorMessage);
 		if(exists) {
 			System.out.println("Here's a user");
-			lblNewLabel.setText("Username already Exists");
+			errorMessage.setText("Username already Exists");
 		}
 		
 	}
 
-	public boolean IExist(String inputName) {
+	public boolean IExist(String inputName, String inputEmail) {
 		//System.out.println("checking database of size " + knownUsers.size());
 		for (int i = 0; i < knownUsers.size(); i++) {
 			//System.out.println("Checking " + knownUsers.get(i).username + " with " + inputName);
 			if (knownUsers.get(i).username.equals(inputName)) {
 				//System.out.println("Found one");
-				lblNewLabel.setText("Username already Exists");
+				errorMessage.setText("Username already Exists");
 				return true;
+			}else if (knownUsers.get(i).email.equals(inputEmail)) {
+				//System.out.println("Found one");
+				errorMessage.setText("Email already in use");
+				return true;
+			}else if(txtUsername.getText().equals("Username") || txtPassword.getText().equals("Password") || txtEmail.getText().equals("Email")) {
+				errorMessage.setText("Unique information required");
 			}
 			// System.out.println("username already exists");
 			else {
-				//LoginPageTest.main(null);
+				WriteToUserList();
+			
+					try {
+						System.out.println("Writing to file");
+						Writer output = new BufferedWriter(new FileWriter("Fake Users.txt", true));
+						System.out.println("new line");
+						output.append("\n");
+						output.append(txtUsername.getText());
+						output.append("\n");
+						System.out.println("new line");
+						output.append(txtPassword.getText());
+						output.append("\n");
+						System.out.println("new line");
+						output.append(txtEmail.getText());
+						output.close();
+						
+						x++;
+						
+						knownUsers.add(new UserDatabaseTest());
+						knownUsers.get(x).setUsername(txtUsername.getText());
+						knownUsers.get(x).setPassword(txtPassword.getText());
+						knownUsers.get(x).setEmail(txtEmail.getText());
+						
+						} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+				this.dispose();
+				backToLoginPage.setVisible(true);
 				return false;
 			}
 		}
 
-=======
-	}
-
-	public boolean IExist(String inputName) {
-		for (int i = 0; i < x; i++) {
-			if (theUsers.get(i).username.equals(inputName)) {
-				return false;
-			}
-				// System.out.println("username already exists");
-				//lblUsernameAlreadyExists.setText("Username Already Extsis");
-			 else {
-				return true;
-			}
-		}
-		
->>>>>>> d7ca2f021fb616693f80c100ff0b4db9b80cf2aa
 		return false;
+	}
+	public void WriteToUserList() {
+		
 	}
 }

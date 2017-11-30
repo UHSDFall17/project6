@@ -2,7 +2,7 @@ package com.EventBrite;
 
 public class EventDatabaseTest {
 	
-	String title, day, month, city, state, address, time;
+	String title, day, month, city, state, buildingNum, street, time, ticketPrice;
 	
 	public String getTitle() {
 		return title;
@@ -19,8 +19,14 @@ public class EventDatabaseTest {
 	public String getCity() {
 		return city;
 	}
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
+	}
+	public String GetBuildingNum() {
+		return buildingNum;
+	}
+	public String getTicketPrice() {
+		return ticketPrice;
 	}
 	public void setTitle(String line) {
 		title = line;
@@ -40,13 +46,22 @@ public class EventDatabaseTest {
 	public void setState(String line) {
 		state = line;
 	}
+	public void setStreet(String line) {
+		street = line;
+	}
+	public void setBuildingNum(String line) {
+		buildingNum = line;
+	}
+	public void setTicketPrice(String line) {
+		ticketPrice = line;
+	}
 	public void PrintEvents() {
 		System.out.println(title);
 		System.out.println(day);
 		System.out.println(month);
 		System.out.println(city);
 		System.out.println(state);
-		System.out.println(address);
+		System.out.println(street);
 		System.out.println(time);
 	}
 	public String SearchEvent(String days, String months, String cities, String states) {
