@@ -45,7 +45,7 @@ public class LoginPageTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginPageTest(final AuthenticationTest theWarden) {
+	public LoginPageTest( final AuthenticationTest theWarden) {
 		
 		warden = theWarden;
 		
