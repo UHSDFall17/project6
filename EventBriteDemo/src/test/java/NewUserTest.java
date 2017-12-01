@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
-import com.EventBrite.EventBriteDemo.Authentication;
-import com.EventBrite.EventBriteDemo.EventDatabase;
-import com.EventBrite.EventBriteDemo.LoginPage;
-import com.EventBrite.EventBriteDemo.ReadInData;
-import com.EventBrite.EventBriteDemo.SignUp;
-import com.EventBrite.EventBriteDemo.UserDatabase;
+//import com.EventBrite.EventBriteDemo.Authentication;
+//import com.EventBrite.EventBriteDemo.EventDatabase;
+//import com.EventBrite.EventBriteDemo.LoginPage;
+//import com.EventBrite.EventBriteDemo.ReadInData;
+//import com.EventBrite.EventBriteDemo.SignUp;
+//import com.EventBrite.EventBriteDemo.UserDatabase;
 
 public class NewUserTest {
 
