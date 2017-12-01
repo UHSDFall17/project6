@@ -1,3 +1,4 @@
+
 //package com.EventBrite.EventBriteDemo;
 
 import java.awt.BorderLayout;
@@ -22,40 +23,40 @@ public class LoginPage extends JFrame {
 	private JPasswordField corpField;
 	private JTextField username;
 	private JTextField password;
+	private final JCheckBox amICorporate;
 	UserDatabase loggedInAs = new UserDatabase();
 	EventPage eventPage;
 	LoginPage loginPage;
 	Authentication warden;
 
+	boolean areWeTesting = false;
+	final JButton btnLogIn;
+	JButton btnCreateAccount;
+
+	// Testing Purposes
+	public String testUsername;
+	public String testPassword;
+	boolean testCheckBox;
+	char[] testCorpCode;
+
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public LoginPage( final Authentication theWarden) {
-		
+	public LoginPage(final Authentication theWarden) {
+
 		warden = theWarden;
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		final JLabel ErrorMessage = new JLabel("");
 		ErrorMessage.setBounds(104, 216, 198, 22);
 		contentPane.add(ErrorMessage);
@@ -70,7 +71,7 @@ public class LoginPage extends JFrame {
 		password.setBounds(172, 116, 116, 22);
 		contentPane.add(password);
 
-		final JCheckBox amICorporate = new JCheckBox("");
+		amICorporate = new JCheckBox("");
 		amICorporate.setBounds(172, 147, 30, 25);
 		contentPane.add(amICorporate);
 
@@ -82,12 +83,12 @@ public class LoginPage extends JFrame {
 		lblPassword.setBounds(80, 119, 68, 16);
 		contentPane.add(lblPassword);
 
-		JButton btnLogIn = new JButton("Log In");
+		btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				theWarden.Authenticate(username.getText(), password.getText(), amICorporate.isSelected(),
 						corpField.getPassword());
-				
+
 				if (theWarden.getCredValidation()) {
 					// Log in as Normal
 					if (theWarden.getCorpValidation() == 0) {
@@ -101,11 +102,12 @@ public class LoginPage extends JFrame {
 					if (theWarden.getCorpValidation() == 2) {
 						ErrorMessage.setText("Incorrect Corporate Code");
 					}
-				}else {
+				} else {
 					ErrorMessage.setText("Incorrect username or Password");
 				}
 			}
 		});
+
 		btnLogIn.setBounds(73, 251, 97, 25);
 		contentPane.add(btnLogIn);
 
@@ -131,7 +133,7 @@ public class LoginPage extends JFrame {
 			}
 		});
 
-		JButton btnCreateAccount = new JButton("Create an Account");
+		btnCreateAccount = new JButton("Create an Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GoToSignUp();
@@ -144,9 +146,23 @@ public class LoginPage extends JFrame {
 		JLabel lblNewLabel = new JLabel("Corporate User?");
 		lblNewLabel.setBounds(57, 151, 113, 16);
 		contentPane.add(lblNewLabel);
+
 	}
+
 	public void GoToSignUp() {
 		SignUp signUpPage = new SignUp(warden.getTheUsers(), this);
 		signUpPage.setVisible(true);
+	}
+
+	public void weAreTesting(String newUsername, String newPassword, boolean box, String codeAr) {
+		areWeTesting = true;
+		username.setText(newUsername);
+		password.setText(newPassword);
+		amICorporate.setSelected(box);
+		corpField.setText(codeAr);
+		btnLogIn.doClick();
+	}
+	public void testJumptoSignUp() {
+		btnCreateAccount.doClick();
 	}
 }

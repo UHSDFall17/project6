@@ -30,24 +30,29 @@ public class NewUserTest {
 
 		Authentication warden = new Authentication();
 		signUp = new SignUp(librarian.getTheUsers());
+		logIn = new LoginPage(warden);
 	}
-
 	@Test
 	public void UserExistsUsername() {
 		newUser = signUp.IExist("KarlFranz", "theogonist@Empire.gov");
 		assertEquals(true, newUser);
 	}
-
 	@Test
 	public void UserExistsEmail() {
 		newUser = signUp.IExist("LuthorHuss", "kfaltdorf@Empire.gov");
 		assertEquals(true, newUser);
 	}
-
 	@Test
 	public void UserDoesNotExist() {
 		newUser = signUp.IExist("Settra", "priestking@nehek.gov");
 		assertEquals(false, newUser);
 	}
+	
+	@Test
+	public void testWriteToList() {
+		signUp.WeAreTesting("Settra", "Imperishable", "priestking@khemri.tmb");
+		signUp.WriteToUserList();
+	}
+	
 
 }

@@ -40,23 +40,6 @@ public class SignUp extends JFrame {
 	LoginPage backToLoginPage;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// InitTestData();
-					// SignUpTest frame = new SignUpTest();
-					// frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public SignUp(ArrayList<UserDatabase> theUsers, LoginPage loginPage) {
@@ -151,7 +134,6 @@ public class SignUp extends JFrame {
 		errorMessage.setBounds(80, 155, 187, 16);
 		contentPane.add(errorMessage);
 		if(exists) {
-			System.out.println("Here's a user");
 			errorMessage.setText("Username already Exists");
 		}
 		
@@ -186,13 +168,16 @@ public class SignUp extends JFrame {
 	}
 	public void WriteToUserList() {
 		try {
-			Writer output = new BufferedWriter(new FileWriter("Fake Users.txt", true));
+			Writer output = new FileWriter("Fake Users.txt", true);
 			
 			output.append("\n");
+			
 			output.append(txtUsername.getText());
+			
 			output.append("\n");
 			
 			output.append(txtPassword.getText());
+			
 			output.append("\n");
 			
 			output.append(txtEmail.getText());
@@ -207,5 +192,10 @@ public class SignUp extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void WeAreTesting(String newUsername, String newPassword, String newEmail) {
+		txtUsername.setText(newUsername);
+		txtPassword.setText(newPassword);
+		txtEmail.setText(newEmail);
 	}
 }

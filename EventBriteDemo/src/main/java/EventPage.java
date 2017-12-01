@@ -18,6 +18,7 @@ public class EventPage extends JFrame {
 	private JButton btnLookForEvent;
 
 	private JPanel contentPane;
+	boolean thisPageIsOpen = false;
 	EventDetailsPage eventDetailPage;
 
 	/**
@@ -39,7 +40,7 @@ public class EventPage extends JFrame {
 	 * Create the frame.
 	 */
 	public EventPage(final ReadInData librarian, final UserDatabase loggedUser) {
-
+		thisPageIsOpen = true;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1011, 617);
@@ -85,11 +86,11 @@ public class EventPage extends JFrame {
 		lblEvents.setBounds(49, 92, 147, 32);
 		contentPane.add(lblEvents);
 
-
-
 		JLabel lblNoDetails = new JLabel("");
 		lblNoDetails.setBounds(609, 103, 56, 16);
 		contentPane.add(lblNoDetails);
 	}
-
+public boolean DoesThisPageExist() {
+	return thisPageIsOpen;
+}
 }

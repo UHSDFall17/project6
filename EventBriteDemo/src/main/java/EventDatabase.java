@@ -22,11 +22,14 @@ public class EventDatabase {
 	public String getStreet() {
 		return street;
 	}
-	public String GetBuildingNum() {
-		return buildingNum;
-	}
 	public String getTicketPrice() {
 		return ticketPrice;
+	}
+	public String getState() {
+		return state;
+	}
+	public String getBuildingNum() {
+		return buildingNum;
 	}
 	public void setTitle(String line) {
 		title = line;
