@@ -7,4 +7,3 @@ notifications:
       - qdinh2@uh.edu
 script:
   - mvn test
-install: ./install-dependencies.sh
