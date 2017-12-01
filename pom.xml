@@ -14,14 +14,16 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
-  <resources>
-	<resource>
-		<directory>src/main/java/com/EventBrite/EventBriteDemo</directory>
-	</resource>
-	<resource>
-		<directory>src/test/java/com/EventBrite/EventBriteDemo</directory>
-	</resource>
-  </resources>
+  <build>
+	<resources>
+		<resource>
+			<directory>src/main/java/com/EventBrite/EventBriteDemo</directory>
+		</resource>
+		<resource>
+			<directory>src/test/java/com/EventBrite/EventBriteDemo</directory>
+		</resource>
+	</resources>
+  </build>
 
   <dependencies>
     <dependency>
