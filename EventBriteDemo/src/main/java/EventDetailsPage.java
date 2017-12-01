@@ -18,22 +18,7 @@ public class EventDetailsPage extends JFrame {
 
 	private JPanel contentPane;
 	EventDatabase theEvent;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// EventDetailsTest frame = new EventDetailsTest();
-					// frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	JButton btnBookTickets;
 
 	/**
 	 * Create the frame.
@@ -98,7 +83,7 @@ public class EventDetailsPage extends JFrame {
 		time.setText(theEvent.time);
 		ticketPrice.setText("$"  + theEvent.ticketPrice);
 
-		JButton btnBookTickets = new JButton("Book Tickets");
+		btnBookTickets = new JButton("Book Tickets");
 		btnBookTickets.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -120,5 +105,8 @@ public class EventDetailsPage extends JFrame {
 		NumberFormat formatter = new DecimalFormat("#0.00");
 		String newPrice = String.valueOf(formatter.format(salePrice));
 		return newPrice;
+	}
+	void TestGoToTransaction() {
+		btnBookTickets.doClick();
 	}
 }

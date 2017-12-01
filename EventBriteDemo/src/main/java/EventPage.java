@@ -22,21 +22,6 @@ public class EventPage extends JFrame {
 	EventDetailsPage eventDetailPage;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public EventPage(final ReadInData librarian, final UserDatabase loggedUser) {

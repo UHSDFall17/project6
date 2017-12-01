@@ -1,3 +1,4 @@
+
 //package com.EventBrite.EventBriteDemo;
 
 import java.io.BufferedReader;
@@ -9,33 +10,11 @@ public class UserDatabase {
 
 	public String username, password, email;
 	boolean isCorporate = false;
-	boolean loggedIn = false;
-
-	public UserDatabase(String name, String pass, String mail) {
-		username = name;
-		password = pass;
-		email = mail;
-	}
 
 	public UserDatabase() {
 		username = "";
 		password = "";
 		email = "";
-	}
-
-	public boolean loggingIn(String name, String pass) {
-		if (username.equals(name) && password.equals(pass)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean newUser(String name, String email, String pass) {
-		if (name.equals("Username") || email.equals("Email") || pass.equals("Password")) {
-			return false;
-		}
-		return true;
 	}
 
 	public String getUsername() {
@@ -60,19 +39,6 @@ public class UserDatabase {
 
 	public void setEmail(String mail) {
 		email = mail;
-	}
-
-	public void setLoggedIn(boolean x) {
-		if (x == true) {
-			loggedIn = true;
-
-		} else if (x == false) {
-			loggedIn = false;
-		}
-	}
-
-	public boolean loggedIn() {
-		return loggedIn;
 	}
 
 	public boolean getCorporate() {

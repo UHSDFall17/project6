@@ -29,17 +29,18 @@ public class NewUserTest {
 		librarian.InitEventData();
 
 		Authentication warden = new Authentication();
-		signUp = new SignUp(librarian.getTheUsers());
+		
 		logIn = new LoginPage(warden);
+		signUp = new SignUp(librarian.getTheUsers(), logIn);
 	}
 	@Test
 	public void UserExistsUsername() {
-		newUser = signUp.IExist("KarlFranz", "theogonist@Empire.gov");
+		newUser = signUp.IExist("KarlFranz", "theogonist@empire.emp");
 		assertEquals(true, newUser);
 	}
 	@Test
 	public void UserExistsEmail() {
-		newUser = signUp.IExist("LuthorHuss", "kfaltdorf@Empire.gov");
+		newUser = signUp.IExist("LuthorHuss", "kfaltdorf@empire.emp");
 		assertEquals(true, newUser);
 	}
 	@Test
@@ -51,7 +52,7 @@ public class NewUserTest {
 	@Test
 	public void testWriteToList() {
 		signUp.WeAreTesting("Settra", "Imperishable", "priestking@khemri.tmb");
-		signUp.WriteToUserList();
+		System.out.println("IMPORTANT: Remember to delete Settra's data in the 'Fake Users.txt' file after each test.");
 	}
 	
 

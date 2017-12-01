@@ -27,22 +27,8 @@ public class Transaction extends JFrame {
 	private int corporateLimit = 30;
 	private boolean overLimit = false;
 	private JTextField howManyToBuy;
+	JButton finalizePurchaseButton;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// TransactionTest frame = new TransactionTest();
-					// frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -116,7 +102,7 @@ public class Transaction extends JFrame {
 		contentPane.add(howManyToBuy);
 		howManyToBuy.setColumns(10);
 
-		JButton finalizePurchaseButton = new JButton("Pay");
+		finalizePurchaseButton = new JButton("Pay");
 		finalizePurchaseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -142,7 +128,7 @@ public class Transaction extends JFrame {
 				
 				
 				if (NameOnCard.getText().equals("") || BillingAddress.getText().equals("")
-						|| CardNumber.getText().equals("") || CRV.getText().equals("")) {
+						|| CardNumber.getText().equals("") || CRV.getText().equals("") || howManyToBuy.getText().equals("")) {
 					ThankYou.setText("Please fill out all boxes with valid information");
 				} else {
 					payment.setVisible(true);
@@ -156,12 +142,13 @@ public class Transaction extends JFrame {
 		JLabel lblNumberOfTickets = new JLabel("Number of Tickets");
 		lblNumberOfTickets.setBounds(201, 40, 116, 16);
 		contentPane.add(lblNumberOfTickets);
-		
-
-		/*for (int i = 0; i < theUsers.size(); i++) {
-			if (theUsers.get(i).loggedIn == true) {
-				WhoAmI.setText(theUsers.get(i).username);
-			}
-		}*/
+	}
+	void WeAreTesting( String newName, String newAddress, String newCardNum, String newCVV, String newBuyNum) {
+		NameOnCard.setText(newName);
+		BillingAddress.setText(newAddress);
+		CardNumber.setText(newCardNum);
+		CRV.setText(newCVV);
+		howManyToBuy.setText(newBuyNum);
+		finalizePurchaseButton.doClick();
 	}
 }

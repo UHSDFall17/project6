@@ -58,19 +58,4 @@ public class EventDatabase {
 	public void setTicketPrice(String line) {
 		ticketPrice = line;
 	}
-	public void PrintEvents() {
-		System.out.println(title);
-		System.out.println(day);
-		System.out.println(month);
-		System.out.println(city);
-		System.out.println(state);
-		System.out.println(street);
-		System.out.println(time);
-	}
-	public String SearchEvent(String days, String months, String cities, String states) {
-		if(days.equals("Day") && months.equals("Month") && cities.equals("City") && states.equals("State")) {
-			return("no information given");
-		}
-		return "0";
-	}
 }
