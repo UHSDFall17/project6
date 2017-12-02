@@ -26,12 +26,14 @@
   </pluginManagement>
 	<resources>
 		<resource>
-			<directory>EventBriteDemo/src/main/java</directory>
-		</resource>
-		<resource>
-			<directory>EventBriteDemo/src/test/java</directory>
+			<directory>src/main/java</directory>
 		</resource>
 	</resources>
+	<testResources>
+		<testResource>
+			<directory>src/test/java</directory>
+		</testResource>
+	</testResources>
   </build>
 
   <dependencies>
