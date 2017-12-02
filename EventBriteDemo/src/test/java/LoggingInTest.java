@@ -52,13 +52,6 @@ public class LoggingInTest {
 		warden.Authenticate("Queek", "Headaker", true, codifier("57879"));
 		boolean badCred = warden.getCredValidation();
 		assertEquals(false, badCred);
-	}
-	@Test 
-	public void AskTheWarden() {
-		warden.Authenticate("Queek", "Headtaker", true, codifier("13579"));
-		assertEquals("Queek", warden.getLoggedUser().getUsername());
-		assertEquals(2, warden.getUserIndex());
-		assertEquals("queekisbestskaven@mors.skv", warden.getReader().getTheUsers().get(2).getEmail());
 	}	
 	@Test
 	public void loginNormal() {
