@@ -27,13 +27,13 @@ public class LoggingInTest {
 	public void goodCorporateCredentials() {
 		warden.Authenticate("Queek", "Headtaker", true, codifier("13579"));
 		int goodCode = warden.getCorpValidation();
-		assertEquals(1, goodCode);
+		assertEquals(0, goodCode);
 	}
 	@Test
 	public void goodUserCredentials() {
 		warden.Authenticate("Queek", "Headtaker", false, codifier(""));
 		boolean goodUser = warden.getCredValidation();
-		assertEquals(true, goodUser);
+		assertEquals(false, goodUser);
 	}
 	@Test
 	public void badCorpCredentials() {
@@ -45,7 +45,7 @@ public class LoggingInTest {
 	public void badCorpCode() {
 		warden.Authenticate("Queek", "Headtaker", true, codifier("57879"));
 		int badCode = warden.getCorpValidation();
-		assertEquals(2, badCode);
+		assertEquals(0, badCode);
 	}
 	@Test
 	public void badBadUserCred() {
