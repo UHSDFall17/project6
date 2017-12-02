@@ -5,4 +5,4 @@ notifications:
       - epierrej@uh.edu.com
       - aravishankar2@uh.edu.com
       - qdinh2@uh.edu
-script: mvn test
+script: mvn clean test
