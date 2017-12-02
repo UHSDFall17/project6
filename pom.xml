@@ -15,6 +15,8 @@
   </properties>
   
   <build>
+    <sourceDirectory>EventBriteDemo/src/main/java</sourceDirectory>
+    <testSourceDirectory>EventBriteDemo/src/test/java</testSourceDirectory>
    <pluginManagement>
     <plugins>
       <plugin>
@@ -22,6 +24,32 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.16</version>
       </plugin>
+       <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+             <configuration>
+               <source>1.7</source>
+               <target>1.7</target>
+             </configuration>
+           </plugin>
+           
+            <plugin>
+            <groupId>org.scala-tools</groupId>
+            <artifactId>maven-scala-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>compile</goal>
+                        <goal>testCompile</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <scalaVersion>${scala.version}</scalaVersion>
+            </configuration>
+        </plugin>
+           
+           
     </plugins>
   </pluginManagement>
 	<resources>
@@ -34,6 +62,7 @@
 			<directory>EventBriteDemo/src/test/java</directory>
 		</testResource>
 	</testResources>
+	
   </build>
 
   <dependencies>
