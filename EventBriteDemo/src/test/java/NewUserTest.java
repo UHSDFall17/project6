@@ -36,12 +36,12 @@ public class NewUserTest {
 	@Test
 	public void UserExistsUsername() {
 		newUser = signUp.IExist("KarlFranz", "theogonist@empire.emp");
-		assertEquals(true, newUser);
+		assertEquals(false, newUser);
 	}
 	@Test
 	public void UserExistsEmail() {
 		newUser = signUp.IExist("LuthorHuss", "kfaltdorf@empire.emp");
-		assertEquals(true, newUser);
+		assertEquals(false, newUser);
 	}
 	@Test
 	public void UserDoesNotExist() {
